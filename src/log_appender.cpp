@@ -45,11 +45,9 @@ bool log_appender::write_record_tmp_file(const log_record &rec, const std::strin
     file.write(reinterpret_cast<const char*>(&data[0]), total_bytes_to_write);
 
     if (!file.good()) {
-        file.close();
         return false;
     }
 
-    file.close();
     return true;
 }
 
@@ -93,7 +91,6 @@ bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
     }
 
     file.read(&record[0], total_size);
-    file.close();
     return true;
 }
 

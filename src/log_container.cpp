@@ -64,12 +64,10 @@ bool log_container::export_log_info() {
         file.write(line.c_str(), line.size());
 
         if (!file.good()) {
-            file.close();
             return false;
         }
     }
 
-    file.close();
     return true;
 }
 
@@ -87,8 +85,6 @@ bool log_container::import_log_info() {
     while (getline(file, line)) {
         data.push_back(line);
     }
-
-    file.close();
 
     if (data.size() != 2) {
         return false;
