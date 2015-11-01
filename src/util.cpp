@@ -71,7 +71,8 @@ std::string emit_line(const std::string &in) {
 uint64_t get_available_free_space() {
     struct statvfs stat;
     struct passwd *pw = getpwuid(getuid());
-    if (NULL != pw && 0 == statvfs(pw->pw_dir, &stat)) {
+
+    if (pw != NULL && statvfs(pw->pw_dir, &stat) == 0) {
         uint64_t freeBytes = (uint64_t)stat.f_bavail * stat.f_frsize;
         return freeBytes;
     }
