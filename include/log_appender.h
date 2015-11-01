@@ -5,6 +5,8 @@
 #include <cstdint>
 #include <mutex>
 
+const uint64_t max_record_size = 32 * 1024 * 1024; // in MB
+
 class log_appender {
   public:
     std::string log_store_name_;

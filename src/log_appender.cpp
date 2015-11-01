@@ -35,6 +35,10 @@ bool log_appender::append_record(const log_record &rec) {
     uint64_t total_bytes_to_write = data.size();
     std::string tmp_file = build_tmp_file_name();
 
+    if (total_bytes_to_write > max_record_size) {
+        return false;
+    }
+    
     file.open(tmp_file.c_str(), std::ios::out | std::ios::binary);
     if (!file.is_open()) {
         return false;
