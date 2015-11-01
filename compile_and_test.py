@@ -4,6 +4,7 @@ import os
 from struct import *
 import subprocess
 import shlex
+import glob
 
 def run_sub_process(mylist):
   pipe = subprocess.Popen(mylist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -12,12 +13,18 @@ def run_sub_process(mylist):
   stderr_res = stderr.decode('utf-8')
   return stdout, stderr_res
 
+def remove_files(fileext):
+  for f in glob.glob(fileext):
+    os.remove(f)
+
 def main():
   # compile unit test
-  run_sub_process(['rm', '*.log'])
-  run_sub_process(['rm', '*.data'])
+  remove_files("*.log")
+  remove_files("*.data")
   run_sub_process(['make', 'clean'])
   run_sub_process(['make', 'BUILD=test'])
+
+  exit(1);
 
   # run unit test to check for memory leaks
   stdout_res, stderr_res = run_sub_process(['valgrind', '--tool=memcheck', '--leak-check=full', './main'])
