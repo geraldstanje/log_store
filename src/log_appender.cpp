@@ -1,6 +1,7 @@
 #include "log_appender.h"
 #include "util.h"
 #include <fstream>
+#include <boost/filesystem.hpp>
 
 log_appender::log_appender(std::string log_store_name, uint64_t max_size): log_store_name_(log_store_name),
     start_record_id_(0),
@@ -32,7 +33,7 @@ bool log_appender::write_record_tmp_file(const log_record &rec, const std::strin
     std::vector<unsigned char> data = rec.get_message();
     uint64_t total_bytes_to_write = data.size();
 
-    if (total_bytes_to_write > max_record_size) {
+    if (total_bytes_to_write > max_record_size || total_bytes_to_write > boost::filesystem::space(".").available) {
         return false;
     }
 

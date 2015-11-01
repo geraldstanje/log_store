@@ -5,7 +5,7 @@ OBJS_TEST = util.o log_record.o log_appender.o log_container.o log_container_ite
 OBJS = util.o log_record.o log_appender.o log_container.o log_container_iterator.o main.o
 CXX = g++
 DEBUG = -g
-LFLAGS = -Wall $(DEBUG) -L/usr/local/Cellar/boost/1.58.0/lib -lboost_system-mt -lboost_thread-mt -lpthread
+LFLAGS = -Wall $(DEBUG) -L/usr/local/Cellar/boost/1.58.0/lib -lboost_system-mt -lboost_thread-mt -lboost_filesystem -lpthread
 cxxflags.test := -Wall -O1 -c $(DEBUG) -std=c++14 #-fsanitize=thread
 cxxflags.executable := -Wall -O3 -c -std=c++14
 cxxflags.benchmark := -Wall -O3 -c -std=c++14 -DBENCHMARKING
