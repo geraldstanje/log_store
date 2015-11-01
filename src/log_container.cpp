@@ -4,10 +4,11 @@
 
 log_container::log_container(std::string log_store_name, uint64_t max_log_store_size): log_appender(log_store_name, max_log_store_size),
     log_store_name_(log_store_name) {
-    import_log_config();
+    import_log_info();
 }
+
 log_container::~log_container() {
-    export_log_config();
+    export_log_info();
 }
 
 log_container_iterator log_container::begin() {
@@ -42,14 +43,14 @@ bool log_container::truncate(const uint64_t &position) {
     return truncate_record(position);
 }
 
-bool log_container::export_log_config() {
+bool log_container::export_log_info() {
     if (start_record_id_ == curr_record_id_) {
         return true;
     }
 
     std::ofstream file;
 
-    file.open(log_store_name_.c_str(), std::ios::out);
+    file.open(build_file_name(log_store_name_, "log").c_str(), std::ios::out);
     if (!file.is_open()) {
         return false;
     }
@@ -65,10 +66,10 @@ bool log_container::export_log_config() {
     return true;
 }
 
-bool log_container::import_log_config() {
+bool log_container::import_log_info() {
     std::ifstream file;
 
-    file.open(log_store_name_.c_str(), std::ios::in);
+    file.open(build_file_name(log_store_name_, "log").c_str(), std::ios::in);
     if (!file.is_open()) {
         return false;
     }

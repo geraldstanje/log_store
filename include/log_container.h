@@ -11,8 +11,8 @@ class log_container: public log_appender {
     std::string log_store_name_;
 
   private:
-    bool export_log_config();
-    bool import_log_config();
+    bool export_log_info();
+    bool import_log_info();
 
   public:
     log_container(std::string log_store_name, uint64_t max_log_store_size);
