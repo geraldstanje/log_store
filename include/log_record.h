@@ -16,7 +16,7 @@ class log_record {
     std::vector<unsigned char> get_message() const;
 };
 
-class string_record : public log_record {
+class string_record: public log_record {
   public:
     string_record(const std::string &str);
 };
