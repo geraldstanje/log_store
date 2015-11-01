@@ -5,8 +5,7 @@
 #include <string>
 
 // a record could be a string-record, time-record, object-record,
-// todo: need to decide what makes sense
-// holds internally a std::vector<unsigned char>
+// holds internally a std::vector<char>
 class log_record {
   public:
     std::vector<char> message_;
