@@ -9,13 +9,6 @@ log_appender::log_appender(std::string log_store_name, uint64_t max_size): log_s
 
 log_appender::~log_appender() {}
 
-bool log_appender::check_internal_data() {
-    if (start_record_id_ != curr_record_id_) {
-        return false;
-    }
-    return true;
-}
-
 uint64_t log_appender::get_start_record_num() {
     return start_record_id_;
 }

@@ -47,11 +47,10 @@ int main() {
     assert(out == "_great_amazing_yes_wonderful");
 
     // empty log store
-    uint64_t size = log.get_position();
-    log.truncate(size-1);
+    uint64_t pos = log.get_position();
+    log.truncate(pos-1);
 
     assert(log.get_size() == 0);
-    assert(log.check_internal_data() == true);
 
     return 0;
 }

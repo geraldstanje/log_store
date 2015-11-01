@@ -20,8 +20,6 @@ class log_appender {
   public:
     log_appender(std::string log_store_name, uint64_t max_size);
     ~log_appender();
-
-    bool check_internal_data();
     uint64_t get_start_record_num();
     uint64_t get_end_record_num();
     uint64_t get_num_of_records();
