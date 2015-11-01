@@ -14,6 +14,9 @@ class log_appender {
     uint64_t curr_record_id_;
     std::mutex mutex_;
 
+  private:
+    bool write_record_tmp_file(const log_record &rec, const std::string &tmp_file_name);
+
   public:
     log_appender(std::string log_store_name, uint64_t max_size);
     ~log_appender();

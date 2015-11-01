@@ -27,35 +27,41 @@ uint64_t log_appender::get_num_of_records() {
     return curr_record_id_ - start_record_id_;
 }
 
-bool log_appender::append_record(const log_record &rec) {
+bool log_appender::write_record_tmp_file(const log_record &rec, const std::string &tmp_file_name) {
     std::ofstream file;
-    bool retval = true;
-
     std::vector<unsigned char> data = rec.get_message();
     uint64_t total_bytes_to_write = data.size();
-    std::string tmp_file = build_tmp_file_name();
 
     if (total_bytes_to_write > max_record_size) {
         return false;
     }
 
-    file.open(tmp_file.c_str(), std::ios::out | std::ios::binary);
+    file.open(tmp_file_name.c_str(), std::ios::out | std::ios::binary);
     if (!file.is_open()) {
         return false;
     }
 
     file.write(reinterpret_cast<const char*>(&data[0]), total_bytes_to_write);
     file.close();
+    return true;
+}
+
+bool log_appender::append_record(const log_record &rec) {
+    std::string tmp_file_name = build_tmp_file_name();
+
+    if (!write_record_tmp_file(rec, tmp_file_name)) {
+        return false;
+    }
 
     // get the lock
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (!rename_file(tmp_file, build_file_name(log_store_name_, "data", curr_record_id_))) {
+    if (!rename_file(tmp_file_name, build_file_name(log_store_name_, "data", curr_record_id_))) {
         return false;
     }
-    
+
     curr_record_id_++;
-    return retval;
+    return true;
 }
 
 bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
