@@ -30,7 +30,7 @@ uint64_t log_appender::get_num_of_records() {
 
 bool log_appender::write_record_tmp_file(const log_record &rec, const std::string &tmp_file_name) {
     std::ofstream file;
-    std::vector<unsigned char> data = rec.get_message();
+    std::vector<char> data = rec.get_message();
     uint64_t total_bytes_to_write = data.size();
 
     if (total_bytes_to_write > max_record_size || total_bytes_to_write > boost::filesystem::space(".").available) {
@@ -42,7 +42,7 @@ bool log_appender::write_record_tmp_file(const log_record &rec, const std::strin
         return false;
     }
 
-    file.write(reinterpret_cast<const char*>(data.data()), total_bytes_to_write);
+    file.write(data.data(), total_bytes_to_write);
 
     if (!file.good()) {
         return false;

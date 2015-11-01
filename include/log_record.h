@@ -9,11 +9,11 @@
 // holds internally a std::vector<unsigned char>
 class log_record {
   public:
-    std::vector<unsigned char> message_;
+    std::vector<char> message_;
 
   public:
-    log_record(std::vector<unsigned char> vec);
-    std::vector<unsigned char> get_message() const;
+    log_record(std::vector<char> vec);
+    std::vector<char> get_message() const;
 };
 
 class string_record: public log_record {
