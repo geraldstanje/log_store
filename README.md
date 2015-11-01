@@ -44,6 +44,7 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 
 ## Multithreading concept
   1. replay a record X: lock; get first number F; open file X+F; unlock; read file
+  -> we can unlock before reading the file. if the file is open unlink can remove the file once all open file handles are closed 
   2. append a new record: write to tmp file; lock; increment record_current_index number L; rename file; unlock
   -> we create a tmp file because writing is relatively long and we do not want to keep the lock the whole time; instead we lock just for the duration of rename
   -> rename is also relativevy slow; but not nearly as slow as writing several megabytes
