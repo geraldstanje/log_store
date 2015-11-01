@@ -76,11 +76,13 @@ bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
 }
 
 bool log_appender::truncate_record(const uint64_t &position) {
-    uint64_t start_record_id_tmp = start_record_id_;
+    uint64_t start_record_id_tmp = 0;
 
     {
         // get the lock
         std::lock_guard<std::mutex> lock(mutex_);
+
+        start_record_id_tmp = start_record_id_;
 
         if (position < start_record_id_ || position >= curr_record_id_) {
             return false;
