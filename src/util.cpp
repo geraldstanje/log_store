@@ -1,7 +1,10 @@
 #include "util.h"
 #include <sstream>
-#include <sys/stat.h>
 #include <iostream>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/statvfs.h>
+#include <pwd.h>
 
 std::string int_to_string(uint64_t number) {
     std::stringstream ss;
@@ -63,4 +66,14 @@ bool rename_file(const std::string &old_filename, const std::string &new_filenam
 
 std::string emit_line(const std::string &in) {
     return in + std::string("\n");
+}
+
+uint64_t get_available_free_space() {
+    struct statvfs stat;
+    struct passwd *pw = getpwuid(getuid());
+    if (NULL != pw && 0 == statvfs(pw->pw_dir, &stat)) {
+        uint64_t freeBytes = (uint64_t)stat.f_bavail * stat.f_frsize;
+        return freeBytes;
+    }
+    return 0ULL;
 }
