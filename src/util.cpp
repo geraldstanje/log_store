@@ -48,6 +48,8 @@ uint64_t get_file_size(const std::string &file_name_no_ext, const uint64_t &file
     return filestatus.st_size;
 }
 
+// unlink(2) (or unlink(1), or rm(1)) will succeed, the file will be removed from your view, 
+// but actually still be in place.  it will be actually removed once all open file handles are closed
 bool remove_file(const std::string &file_name_no_ext, const uint64_t &file_id) {
     std::string file_name = build_file_name(file_name_no_ext, "data", file_id);
     int retval = unlink(file_name.c_str());

@@ -38,7 +38,7 @@ bool log_appender::append_record(const log_record &rec) {
     if (total_bytes_to_write > max_record_size) {
         return false;
     }
-    
+
     file.open(tmp_file.c_str(), std::ios::out | std::ios::binary);
     if (!file.is_open()) {
         return false;
@@ -50,7 +50,9 @@ bool log_appender::append_record(const log_record &rec) {
     // get the lock
     std::lock_guard<std::mutex> lock(mutex_);
 
-    rename_file(tmp_file, build_file_name(log_store_name_, "data", curr_record_id_));
+    if (!rename_file(tmp_file, build_file_name(log_store_name_, "data", curr_record_id_))) {
+        return false;
+    }
     curr_record_id_++;
     return retval;
 }
@@ -63,15 +65,15 @@ bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
         if (curr_record_id_ < start_record_id_ || record_id >= curr_record_id_) {
             return false;
         }
-    }
 
-    uint64_t total_size = get_file_size(log_store_name_, record_id);
-    record.resize(total_size, 0);
+      uint64_t total_size = get_file_size(log_store_name_, record_id);
+      record.resize(total_size, 0);
 
-    std::ifstream file;
-    file.open(build_file_name(log_store_name_, "data", record_id).c_str(), std::ios::in | std::ios::binary);
-    if (!file.is_open()) {
-        return false;
+      std::ifstream file;
+      file.open(build_file_name(log_store_name_, "data", record_id).c_str(), std::ios::in | std::ios::binary);
+      if (!file.is_open()) {
+          return false;
+      }
     }
 
     file.read(&record[0], total_size);
