@@ -42,7 +42,7 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 - *.log stores the 64 bit record_start_index and 64 bit record_current_index
 - *.data stores the logged data, each blob will be stored in a separated file
 
-## Multithreading concept
+## Multithreading
   1. replay a record X: lock; get first number F; open file X+F; unlock; read file <br>
   -> we can unlock before reading the file. if the file is open unlink can remove the file once all open file handles are closed 
   2. append a new record: write to tmp file; lock; increment record_current_index number L; rename file; unlock <br>
