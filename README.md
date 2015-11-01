@@ -49,3 +49,7 @@ You may use the standard C and C++ libraries, as well as any system calls availa
   -> we create a tmp file because writing is relatively long and we do not want to keep the lock the whole time; instead we lock just for the duration of rename <br>
   -> rename is also relativevy slow; but not nearly as slow as writing several megabytes
   3. truncate at P; lock; remember old first F; set new first to P; unlock; proceed to delete files with numbers less than F
+
+## External Libs
+- boost::filesystem: to check if there is enough space on the disk to write the file
+- boost::uuids and boost::lexical_cast to generate a random tmp filename
