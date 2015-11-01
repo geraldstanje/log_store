@@ -37,8 +37,6 @@ unsigned int log_container::get_size() {
     return get_num_of_records();
 }
 
-// Removes all data before the given position in the log store. Disk space used must remain roughly
-// proportional to retained data size.
 bool log_container::truncate(const uint64_t &position) {
     return truncate_record(position);
 }
