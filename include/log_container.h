@@ -13,7 +13,6 @@ class log_container: public log_appender {
   private:
     bool export_log_info();
     bool import_log_info();
-    std::string emit_line(const std::string &in);
 
   public:
     log_container(std::string log_store_name, uint64_t max_log_store_size);

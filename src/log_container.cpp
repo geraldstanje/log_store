@@ -41,10 +41,6 @@ bool log_container::truncate(const uint64_t &position) {
     return truncate_record(position);
 }
 
-std::string log_container::emit_line(const std::string &in) {
-    return in + std::string("\n");
-}
-
 bool log_container::export_log_info() {
     if (start_record_id_ == curr_record_id_) {
         return true;

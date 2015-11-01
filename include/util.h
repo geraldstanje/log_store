@@ -12,5 +12,6 @@ std::string build_tmp_file_name();
 uint64_t get_file_size(const std::string &file_name_no_ext, const uint64_t &file_id);
 bool remove_file(const std::string &file_name_no_ext, const uint64_t &file_id);
 bool rename_file(const std::string &old_filename, const std::string &new_filename);
+std::string emit_line(const std::string &in);
 
 #endif

@@ -65,3 +65,7 @@ bool rename_file(const std::string &old_filename, const std::string &new_filenam
     }
     return true;
 }
+
+std::string emit_line(const std::string &in) {
+    return in + std::string("\n");
+}
