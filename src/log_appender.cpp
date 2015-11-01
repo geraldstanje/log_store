@@ -58,6 +58,9 @@ bool log_appender::append_record(const log_record &rec) {
 }
 
 bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
+    std::ifstream file;
+    uint64_t total_size = 0;
+
     {
         // get the lock
         std::lock_guard<std::mutex> lock(mutex_);
@@ -66,14 +69,13 @@ bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
             return false;
         }
 
-      uint64_t total_size = get_file_size(log_store_name_, record_id);
-      record.resize(total_size, 0);
+        total_size = get_file_size(log_store_name_, record_id);
+        record.resize(total_size, 0);
 
-      std::ifstream file;
-      file.open(build_file_name(log_store_name_, "data", record_id).c_str(), std::ios::in | std::ios::binary);
-      if (!file.is_open()) {
-          return false;
-      }
+        file.open(build_file_name(log_store_name_, "data", record_id).c_str(), std::ios::in | std::ios::binary);
+        if (!file.is_open()) {
+            return false;
+        }
     }
 
     file.read(&record[0], total_size);
