@@ -35,10 +35,9 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 # Design
 
 ## General
-- to minimize copying, blobs will segmented in multiple files
+- to minimize copying, blobs will segmented into multiple files
 - truncate will find all the files before the given position that are fully of completely deletable data
 - we have files F_1... F_n and they are filled with lines of data that have corresponding 'position' IDs
-- the main decision we have to make is how you will put the data into the files
 - the log store remembers a 64 bit record_start_index and 64 bit record_current_index
 
 ## Multithreading concept
