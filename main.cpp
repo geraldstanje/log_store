@@ -1,7 +1,5 @@
 #include "log_container.h"
 #include "log_container_iterator.h"
-#include "util.h"
-#include <iostream>
 
 int main() {
     log_container log("system_log", 520);
