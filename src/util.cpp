@@ -42,14 +42,14 @@ std::string build_tmp_file_name() {
     return boost::lexical_cast<std::string>((boost::uuids::random_generator())());
 }
 
-uint64_t get_file_size(const uint64_t &file_id) {
+uint64_t get_file_size(const std::string &file_name_no_ext, const uint64_t &file_id) {
     struct stat filestatus;
-    stat(build_file_name("F", "txt", file_id).c_str(), &filestatus);
+    stat(build_file_name(file_name_no_ext, "txt", file_id).c_str(), &filestatus);
     return filestatus.st_size;
 }
 
-bool remove_file(const uint64_t &file_id) {
-    std::string file_name = build_file_name("F", "txt", file_id);
+bool remove_file(const std::string &file_name_no_ext, const uint64_t &file_id) {
+    std::string file_name = build_file_name(file_name_no_ext, "txt", file_id);
     int retval = unlink(file_name.c_str()); // todo: check return code
     if (retval != 0) {
         return false;

@@ -7,12 +7,13 @@
 
 class log_appender {
   public:
+    std::string log_store_name_;
     uint64_t start_record_id_;
     uint64_t curr_record_id_;
     std::mutex mutex_;
 
   public:
-    log_appender(uint64_t max_size);
+    log_appender(std::string log_store_name, uint64_t max_size);
     ~log_appender();
 
     bool check_internal_data();

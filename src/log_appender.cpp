@@ -2,7 +2,9 @@
 #include "util.h"
 #include <fstream>
 
-log_appender::log_appender(uint64_t max_size): start_record_id_(0), curr_record_id_(0) {}
+log_appender::log_appender(std::string log_store_name, uint64_t max_size): log_store_name_(log_store_name),
+    start_record_id_(0),
+    curr_record_id_(0) {}
 
 log_appender::~log_appender() {}
 
@@ -44,7 +46,7 @@ bool log_appender::append_record(const log_record &rec) {
     // get the lock
     std::lock_guard<std::mutex> lock(mutex_);
 
-    rename_file(tmp_file, build_file_name("F", "txt", curr_record_id_));
+    rename_file(tmp_file, build_file_name(log_store_name_, "txt", curr_record_id_));
     curr_record_id_++;
     return retval;
 }
@@ -59,11 +61,11 @@ bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
         }
     }
 
-    uint64_t total_size = get_file_size(record_id);
+    uint64_t total_size = get_file_size(log_store_name_, record_id);
     record.resize(total_size, 0);
 
     std::ifstream file;
-    file.open(build_file_name("F", "txt", record_id).c_str(), std::ios::in | std::ios::binary);
+    file.open(build_file_name(log_store_name_, "txt", record_id).c_str(), std::ios::in | std::ios::binary);
     if (!file.is_open()) {
         return false;
     }
@@ -90,7 +92,7 @@ bool log_appender::truncate_record(const uint64_t &position) {
     uint64_t record_id = start_record_id_tmp;
 
     while (record_id <= position) {
-        if (!remove_file(record_id)) {
+        if (!remove_file(log_store_name_, record_id)) {
             return false;
         }
         record_id++;
