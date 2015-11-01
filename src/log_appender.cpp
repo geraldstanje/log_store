@@ -43,6 +43,12 @@ bool log_appender::write_record_tmp_file(const log_record &rec, const std::strin
     }
 
     file.write(reinterpret_cast<const char*>(&data[0]), total_bytes_to_write);
+
+    if (!file.good()) {
+        file.close();
+        return false;
+    }
+
     file.close();
     return true;
 }

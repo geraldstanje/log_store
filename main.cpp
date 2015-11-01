@@ -46,6 +46,8 @@ int main() {
 
     assert(out == "_great_amazing_yes_wonderful");
 
+    return 0;
+
     // empty log store
     uint64_t size = log.get_position();
     log.truncate(size-1);

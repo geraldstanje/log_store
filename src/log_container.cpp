@@ -41,6 +41,10 @@ bool log_container::truncate(const uint64_t &position) {
     return truncate_record(position);
 }
 
+std::string log_container::emit_line(const std::string &in) {
+    return in + std::string("\n");
+}
+
 bool log_container::export_log_info() {
     if (start_record_id_ == curr_record_id_) {
         return true;
@@ -53,13 +57,18 @@ bool log_container::export_log_info() {
         return false;
     }
 
-    std::string start_record_id_str = int_to_string(start_record_id_);
-    std::string curr_record_id_str = int_to_string(curr_record_id_);
+    std::vector<std::string> data = {int_to_string(start_record_id_), int_to_string(curr_record_id_)};
 
-    file.write(start_record_id_str.c_str(), start_record_id_str.size());
-    file.write("\n", 1);
-    file.write(curr_record_id_str.c_str(), curr_record_id_str.size());
-    file.write("\n", 1);
+    for (unsigned int i = 0; i < data.size(); i++) {
+        std::string line = emit_line(data[i]);
+        file.write(line.c_str(), line.size());
+
+        if (!file.good()) {
+            file.close();
+            return false;
+        }
+    }
+
     file.close();
     return true;
 }
@@ -72,14 +81,20 @@ bool log_container::import_log_info() {
         return false;
     }
 
-    std::string start_record_id_str;
-    std::string curr_record_id_str;
+    std::vector<std::string> data;
+    std::string line;
 
-    std::getline(file, start_record_id_str);
-    std::getline(file, curr_record_id_str);
+    while (getline(file, line)) {
+        data.push_back(line);
+    }
+
     file.close();
 
-    start_record_id_ = string_to_int(start_record_id_str);
-    curr_record_id_ = string_to_int(curr_record_id_str);
+    if (data.size() != 2) {
+        return false;
+    }
+
+    start_record_id_ = string_to_int(data[0]);
+    curr_record_id_ = string_to_int(data[1]);
     return true;
 }
