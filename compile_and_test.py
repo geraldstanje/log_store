@@ -24,8 +24,6 @@ def main():
   run_sub_process(['make', 'clean'])
   run_sub_process(['make', 'BUILD=test'])
 
-  exit(1);
-
   # run unit test to check for memory leaks
   stdout_res, stderr_res = run_sub_process(['valgrind', '--tool=memcheck', '--leak-check=full', './main'])
 
