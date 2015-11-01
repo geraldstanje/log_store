@@ -26,7 +26,7 @@ Functions:
   replay(position, callback)
     Replays all record blobs from the position onward, invoking the callback for each blob visited
 
-Note: The above function signatures are only illustrative. You may vary your interface in whatever way you think makes sense. For example, instead of a callback for replay(…), you may decide to use an iterator pattern.
+Note: The above function signatures are only illustrative. You may vary your interface in whatever way you think makes sense. For example, instead of a callback for replay (...), you may decide to use an iterator pattern.
 
 Notes:
 
@@ -38,7 +38,9 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 - to minimize copying, blobs will segmented into multiple files
 - truncate will find all the files before the given position that are fully of completely deletable data
 - we have files F_1... F_n and they are filled with lines of data that have corresponding 'position' IDs
-- the log store remembers a 64 bit record_start_index and 64 bit record_current_index
+- the log store internally maintains a 64 bit record_start_index and 64 bit record_current_index
+- *.log stores the 64 bit record_start_index and 64 bit record_current_index
+- *.data stores the logged data, each blob will be stored in a separated file
 
 ## Multithreading concept
   1. replay a record X: lock; get first number F; open file X+F; unlock; read file
