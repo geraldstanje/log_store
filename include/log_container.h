@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <string>
 
-class log_container : public log_appender {
+class log_container: public log_appender {
   private:
     std::string log_store_name_;
 
