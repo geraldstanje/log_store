@@ -52,4 +52,3 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 
 ## External Libs
 - boost::filesystem: to check if there is enough space on the disk to write the file
-- boost::uuids and boost::lexical_cast to generate a random tmp filename
