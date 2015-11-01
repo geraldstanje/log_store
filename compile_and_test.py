@@ -22,12 +22,10 @@ def main():
   # run unit test to check for memory leaks
   stdout_res, stderr_res = run_sub_process(['valgrind', '--tool=memcheck', '--leak-check=full', './main'])
 
-  print stderr_res
-
   if stderr_res.find("ERROR SUMMARY: 0 errors") == -1:
-    print "unit test + valigrind check...failed"
+    print "unit test and valgrind check...failed"
   else:
-    print "unit test + valigrind check...passed"
+    print "unit test and valgrind check...passed"
 
 if __name__ == "__main__":
   main()
