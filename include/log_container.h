@@ -10,6 +10,10 @@ class log_container: public log_appender {
   private:
     std::string log_store_name_;
 
+  private:
+    bool export_log_config();
+    bool import_log_config();
+
   public:
     log_container(std::string log_store_name, uint64_t max_log_store_size);
     ~log_container();
@@ -23,8 +27,6 @@ class log_container: public log_appender {
     // Removes all data before the given position in the log store. Disk space used must remain roughly
     // proportional to retained data size.
     bool truncate(const uint64_t &position);
-    bool export_log_config();
-    bool import_log_config();
 };
 
 #endif
