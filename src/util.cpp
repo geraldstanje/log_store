@@ -50,7 +50,7 @@ uint64_t get_file_size(const std::string &file_name_no_ext, const uint64_t &file
 
 bool remove_file(const std::string &file_name_no_ext, const uint64_t &file_id) {
     std::string file_name = build_file_name(file_name_no_ext, "data", file_id);
-    int retval = unlink(file_name.c_str()); // todo: check return code
+    int retval = unlink(file_name.c_str());
     if (retval != 0) {
         return false;
     }
