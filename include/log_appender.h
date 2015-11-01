@@ -20,7 +20,6 @@ class log_appender {
     uint64_t get_start_record_num();
     uint64_t get_end_record_num();
     uint64_t get_num_of_records();
-    // todo: add error handling
     bool append_record(const log_record &rec);
     bool read_record(const uint64_t &record_id, std::string &record);
     bool truncate_record(const uint64_t &position);
