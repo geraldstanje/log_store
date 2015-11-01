@@ -8,7 +8,6 @@ DEBUG = -g
 LFLAGS = -Wall $(DEBUG) -L/usr/local/Cellar/boost/1.58.0/lib -lboost_system-mt -lboost_thread-mt -lboost_filesystem -lpthread
 cxxflags.test := -Wall -O1 -c $(DEBUG) -std=c++14 #-fsanitize=thread
 cxxflags.executable := -Wall -O3 -c -std=c++14
-cxxflags.benchmark := -Wall -O3 -c -std=c++14 -DBENCHMARKING
 CXXFLAGS := ${cxxflags.${BUILD}}
 
 all: $(BUILD)
@@ -20,10 +19,6 @@ test: $(OBJS_TEST)
 executable: $(OBJS)
 	@echo "Build executable..."
 	$(CXX) $(OBJS) -o main $(LFLAGS)
-	
-benchmark: $(OBJS_TEST)
-	@echo "Build bench..."
-	$(CXX) $(OBJS_TEST) -o main $(LFLAGS)
 
 util.o:
 	$(CXX) $(CXXFLAGS) -I$(INCDIR) $(SRCDIR)/util.cpp
