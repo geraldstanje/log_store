@@ -3,6 +3,8 @@
 
 #include <string>
 
+const uint64_t MAX_LEN_FILENAME = 1024;
+
 std::string int_to_string(uint64_t number);
 uint64_t string_to_int(std::string &str);
 std::string build_file_name(const std::string &file_name_no_ext, const std::string &file_extension, uint64_t file_number = 0);

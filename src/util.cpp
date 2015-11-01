@@ -6,6 +6,7 @@
 #include <boost/uuid/uuid_io.hpp>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <iostream>
 
 std::string int_to_string(uint64_t number) {
     std::stringstream ss;
@@ -17,9 +18,6 @@ uint64_t string_to_int(std::string &str) {
     std::stringstream ss(str);
     uint64_t i;
     ss >> i;
-    //if (ss.fail()) {
-    // Error
-    //}
     return i;
 }
 
@@ -39,7 +37,8 @@ std::string build_file_name(const std::string &file_name_no_ext, const std::stri
 }
 
 std::string build_tmp_file_name() {
-    return boost::lexical_cast<std::string>((boost::uuids::random_generator())());
+    char buf[MAX_LEN_FILENAME];
+    return std::tmpnam(buf);
 }
 
 uint64_t get_file_size(const std::string &file_name_no_ext, const uint64_t &file_id) {
