@@ -41,9 +41,9 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 - the main decision we have to make is how you will put the data into the files
 - the log store remembers a 64 bit record_start_index and 64 bit record_current_index
 
-## Multithreading concept:
-  1. reading a record X: lock; get first number F; open file X+F; unlock; read file
-  2. appending a new record: write to tmp file; lock; increment record_current_index number L; rename file; unlock
+## Multithreading concept
+  1. replay a record X: lock; get first number F; open file X+F; unlock; read file
+  2. append a new record: write to tmp file; lock; increment record_current_index number L; rename file; unlock
   -> we create a tmp file because writing is relatively long and we do not want to keep the lock the whole time; instead we lock just for the duration of rename
   -> rename is also relativevy slow; but not nearly as slow as writing several megabytes
-  3. truncating at P; lock; remember old first F; set new first to P; unlock; proceed to delete files with numbers less than F
+  3. truncate at P; lock; remember old first F; set new first to P; unlock; proceed to delete files with numbers less than F
