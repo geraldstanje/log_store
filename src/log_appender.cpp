@@ -53,6 +53,7 @@ bool log_appender::append_record(const log_record &rec) {
     if (!rename_file(tmp_file, build_file_name(log_store_name_, "data", curr_record_id_))) {
         return false;
     }
+    
     curr_record_id_++;
     return retval;
 }
