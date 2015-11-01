@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-// a record could be a string-record, time-record, line-record, object-record,
+// a record could be a string-record, time-record, object-record,
 // todo: need to decide what makes sense
 // holds internally a std::vector<unsigned char>
 class log_record {
