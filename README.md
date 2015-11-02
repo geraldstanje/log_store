@@ -39,7 +39,7 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 
 ## General
 - to minimize copying, blobs will segmented into multiple files
-- we have files F_1... F_n and they are filled with lines of data that have corresponding 'position' IDs
+- we have files F_0... F_n and they are filled with lines of data that have corresponding 'position' IDs
 - the log store internally maintains a 64 bit start_record_id_ and 64 bit end_record_id_
 - append will create a new file (*.data) with the current end_record_id_ and increment end_record_id_ plus 1
 - truncate will find all the files before the given position that are fully of completely deletable data
