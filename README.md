@@ -57,3 +57,6 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 The following command runs a unit test.
 
 $ python compile_and_test.py
+
+# TODO:
+- add more testing
