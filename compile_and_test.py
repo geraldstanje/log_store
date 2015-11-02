@@ -19,7 +19,7 @@ def remove_files(fileext):
 
 def main():
   # compile unit test
-  remove_files("*.log")
+  remove_files("*.config")
   remove_files("*.data")
   run_sub_process(['make', 'clean'])
   run_sub_process(['make', 'BUILD=test'])

@@ -43,7 +43,7 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 - the log store internally maintains a 64 bit start_record_id_ and 64 bit end_record_id_
 - append will create a new file (*.data) with the current end_record_id_ and increment end_record_id_ plus 1
 - truncate will find all the files before the given position that are fully of completely deletable data
-- if the log store destructor exports the 64 bit start_record_id_ and 64 bit end_record_id_ to a log file, which can be read at startup
+- if the log store destructor exports the 64 bit start_record_id_ and 64 bit end_record_id_ to a .config file, which can be read at startup
 
 ## Multithreading
   1. replay a record X: lock; get first number F; open file X+F; unlock; read file <br>
