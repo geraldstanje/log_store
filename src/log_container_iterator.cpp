@@ -27,7 +27,7 @@ std::string log_container_iterator::operator* () {
 std::string log_container_iterator::get_curr_record() {
     std::string record;
     if (!ptr_->read_record(curr_record_id_, record)) {
-        curr_record_id_ = ptr_->get_end_record_num() - 1; // todo: checks
+        curr_record_id_ = ptr_->get_end_record_num() - 1;
         return "";
     }
     return record;
