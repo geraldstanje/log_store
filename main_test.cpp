@@ -18,7 +18,7 @@ class thread_test {
   public:
     thread_test(log_container *log): log_(log) {}
 
-    void writer_thread() {
+    void write_thread() {
         for (uint64_t i = 0; i < 100; i++) {
             log_->append(string_record("hello_world: " + int_to_string(i)));
 
@@ -77,10 +77,10 @@ void multithreading_test() {
 
     std::vector<std::thread> reader_pool;
 
-    // create writer thread
-    std::thread writer(&thread_test::writer_thread, &t);
+    // create write thread
+    std::thread writer(&thread_test::write_thread, &t);
 
-    // create multiple reader threads
+    // create multiple read threads
     for (uint64_t i = 0; i < 10; i++) {
         reader_pool.push_back(std::thread(&thread_test::read_thread, &t));
     }
