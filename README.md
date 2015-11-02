@@ -85,7 +85,7 @@ The following command runs a unit test.
 
 $ python compile_and_test.py
 
-# TODO:
+# TODO
 - check code with clang static analyzer
 - add more testing
 - add different log record types, at the moment only string records are supported
