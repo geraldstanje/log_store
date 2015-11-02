@@ -19,7 +19,7 @@ class thread_test {
     thread_test(log_container *log): log_(log) {}
 
     void write_thread() {
-        for (uint64_t i = 0; i < 100; i++) {
+        for (uint64_t i = 1; i <= 100; i++) {
             log_->append(string_record("hello_world: " + int_to_string(i)));
 
             std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -48,7 +48,7 @@ bool check_read_data(std::vector<std::vector<std::string>> &&out) {
     std::string pattern = "hello_world: ";
 
     for (auto &vec : out) {
-        int64_t prev_count = -1;
+        uint64_t prev_count = 0;
 
         for (auto &e : vec) {
             size_t pos = e.find(pattern);
@@ -58,7 +58,7 @@ bool check_read_data(std::vector<std::vector<std::string>> &&out) {
 
             pos += pattern.size();
             std::string counter = e.substr(pos, e.size() - pos);
-            int64_t count = string_to_int(counter);
+            uint64_t count = string_to_int(counter);
 
             if (count <= prev_count) {
                 return false;
