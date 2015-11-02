@@ -47,7 +47,6 @@ bool log_container::export_log_info() {
     }
 
     std::ofstream file;
-
     file.open(build_file_name(log_store_name_, "log").c_str(), std::ios::out);
     if (!file.is_open()) {
         return false;
@@ -69,7 +68,6 @@ bool log_container::export_log_info() {
 
 bool log_container::import_log_info() {
     std::ifstream file;
-
     file.open(build_file_name(log_store_name_, "log").c_str(), std::ios::in);
     if (!file.is_open()) {
         return false;
