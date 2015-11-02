@@ -53,6 +53,26 @@ You may use the standard C and C++ libraries, as well as any system calls availa
   -> rename is also relativevy slow; but not nearly as slow as writing several megabytes
   3. truncate at P; lock; remember old first F; set new first to P; unlock; proceed to delete files with numbers less than F
 
+# Example Usage
+```cpp
+// create log container
+log_container log("system_log");
+// append blobs
+log.append(string_record("hello_how_are_you"));
+log.append(string_record("_great"));
+log.append(string_record("_amazing"));
+log.append(string_record("_yes"));
+
+// replay blobs from the beginning till end
+for (log_container_iterator itr = log.begin(); itr != log.end(); itr++) {
+    std::cout << *itr << std::endl;
+}
+
+// truncate blobs from a position till the start
+uint64_t pos = log.get_position();
+log.truncate(pos-1);
+```
+
 # Run Unit test
 The following command runs a unit test.
 
