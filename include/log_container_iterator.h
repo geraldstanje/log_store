@@ -22,7 +22,6 @@ class log_container_iterator {
     void operator++();
     log_container_iterator operator+(uint64_t offset) const;
     void log_container_iterator_begin();
-    void log_container_iterator_begin(uint64_t position);
     void log_container_iterator_end();
 };
 

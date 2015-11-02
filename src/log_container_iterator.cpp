@@ -52,10 +52,6 @@ void log_container_iterator::log_container_iterator_begin() {
     curr_record_id_ = ptr_->get_start_record_num();
 }
 
-void log_container_iterator::log_container_iterator_begin(uint64_t position) {
-    curr_record_id_ = ptr_->get_start_record_num() + position;
-}
-
 void log_container_iterator::log_container_iterator_end() {
     curr_record_id_ = ptr_->get_end_record_num();
 }
