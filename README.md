@@ -41,8 +41,8 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 - to minimize copying, blobs will segmented into multiple files
 - truncate will find all the files before the given position that are fully of completely deletable data
 - we have files F_1... F_n and they are filled with lines of data that have corresponding 'position' IDs
-- the log store internally maintains a 64 bit record_start_index and 64 bit record_current_index
-- *.log stores the 64 bit record_start_index and 64 bit record_current_index
+- the log store internally maintains a 64 bit start_record_id_ and 64 bit end_record_id_
+- *.log stores the 64 bit start_record_id_ and 64 bit end_record_id_
 - *.data stores the logged data, each blob will be stored in a separated file
 
 ## Multithreading

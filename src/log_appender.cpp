@@ -4,7 +4,7 @@
 
 log_appender::log_appender(std::string log_store_name, uint64_t max_size): log_store_name_(log_store_name),
     start_record_id_(0),
-    curr_record_id_(0) {}
+    end_record_id_(0) {}
 
 log_appender::~log_appender() {}
 
@@ -13,11 +13,11 @@ uint64_t log_appender::get_start_record_num() const {
 }
 
 uint64_t log_appender::get_end_record_num() const {
-    return curr_record_id_;
+    return end_record_id_;
 }
 
 uint64_t log_appender::get_num_of_records() const {
-    return curr_record_id_ - start_record_id_;
+    return end_record_id_ - start_record_id_;
 }
 
 bool log_appender::write_record_tmp_file(const log_record &rec, const std::string &tmp_file_name) {
@@ -25,9 +25,9 @@ bool log_appender::write_record_tmp_file(const log_record &rec, const std::strin
     std::vector<char> data = rec.get_message();
     uint64_t total_bytes_to_write = data.size();
 
-    if (total_bytes_to_write == 0 || 
-        total_bytes_to_write > max_record_size || 
-        total_bytes_to_write > get_available_free_space()) {
+    if (total_bytes_to_write == 0 ||
+            total_bytes_to_write > max_record_size ||
+            total_bytes_to_write > get_available_free_space()) {
         return false;
     }
 
@@ -54,11 +54,11 @@ bool log_appender::append_record(const log_record &rec) {
     // get the lock
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (!rename_file(tmp_file_name, build_file_name(log_store_name_, "data", curr_record_id_))) {
+    if (!rename_file(tmp_file_name, build_file_name(log_store_name_, "data", end_record_id_))) {
         return false;
     }
 
-    curr_record_id_++;
+    end_record_id_++;
     return true;
 }
 
@@ -70,7 +70,7 @@ bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
         // get the lock
         std::lock_guard<std::mutex> lock(mutex_);
 
-        if (curr_record_id_ < start_record_id_ || record_id >= curr_record_id_) {
+        if (record_id < start_record_id_ || record_id >= end_record_id_) {
             return false;
         }
 
@@ -96,7 +96,7 @@ bool log_appender::truncate_record(const uint64_t &position) {
 
         start_record_id_tmp = start_record_id_;
 
-        if (position < start_record_id_ || position >= curr_record_id_) {
+        if (position < start_record_id_ || position >= end_record_id_) {
             return false;
         }
 

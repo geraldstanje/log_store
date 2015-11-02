@@ -11,7 +11,7 @@ class log_appender {
   protected:
     std::string log_store_name_;
     uint64_t start_record_id_;
-    uint64_t curr_record_id_;
+    uint64_t end_record_id_;
     std::mutex mutex_;
 
   private:

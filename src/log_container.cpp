@@ -42,7 +42,7 @@ bool log_container::truncate(const uint64_t &position) {
 }
 
 bool log_container::export_log_info() {
-    if (start_record_id_ == curr_record_id_) {
+    if (start_record_id_ == end_record_id_) {
         return true;
     }
 
@@ -52,11 +52,11 @@ bool log_container::export_log_info() {
         return false;
     }
 
-    std::vector<std::string> data = {int_to_string(start_record_id_), int_to_string(curr_record_id_)};
+    std::vector<std::string> data = {int_to_string(start_record_id_), int_to_string(end_record_id_)};
 
     for (unsigned int i = 0; i < data.size(); i++) {
         std::string line = emit_line(data[i]);
-        
+
         file.write(line.c_str(), line.size());
         if (!file.good()) {
             return false;
@@ -85,6 +85,6 @@ bool log_container::import_log_info() {
     }
 
     start_record_id_ = string_to_int(data[0]);
-    curr_record_id_ = string_to_int(data[1]);
+    end_record_id_ = string_to_int(data[1]);
     return true;
 }
