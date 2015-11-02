@@ -20,9 +20,7 @@ class thread_test {
 
     void writer_thread() {
         for (uint64_t i = 0; i < 100; i++) {
-            std::stringstream ss;
-            ss << i;
-            log_->append(string_record("hello_world: " + ss.str()));
+            log_->append(string_record("hello_world: " + int_to_string(i)));
 
             std::this_thread::sleep_for(std::chrono::milliseconds(50));
         }
