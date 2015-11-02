@@ -42,4 +42,4 @@ main_test.o:
 	$(CXX) $(CXXFLAGS) -I$(INCDIR) main_test.cpp
 
 clean:
-	rm -f *.o main; rm -rf main.dSYM
+	rm -f *.o main
