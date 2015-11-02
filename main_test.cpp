@@ -83,7 +83,7 @@ void multithreading_test() {
     std::thread writer(&thread_test::writer_thread, &t);
 
     // create multiple reader threads
-    for (unsigned int i = 0; i < 10; i++) {
+    for (uint64_t i = 0; i < 10; i++) {
         reader_pool.push_back(std::thread(&thread_test::read_thread, &t));
     }
 
