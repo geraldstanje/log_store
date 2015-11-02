@@ -56,8 +56,8 @@ bool log_container::export_log_info() {
 
     for (unsigned int i = 0; i < data.size(); i++) {
         std::string line = emit_line(data[i]);
+        
         file.write(line.c_str(), line.size());
-
         if (!file.good()) {
             return false;
         }
