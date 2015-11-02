@@ -88,4 +88,4 @@ $ python compile_and_test.py
 # TODO:
 - add more testing
 - add different log record types, at the moment only string records are supported
-- initialize start_record_id_ and 64 bit end_record_id_ to zero if we hit uint64_t::max
+- initialize start_record_id_ and end_record_id_ to zero if we hit uint64_t::max
