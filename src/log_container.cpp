@@ -54,7 +54,7 @@ bool log_container::export_log_info() {
 
     std::vector<std::string> data = {int_to_string(start_record_id_), int_to_string(end_record_id_)};
 
-    for (unsigned int i = 0; i < data.size(); i++) {
+    for (uint64_t i = 0; i < data.size(); i++) {
         std::string line = emit_line(data[i]);
 
         file.write(line.c_str(), line.size());
