@@ -20,7 +20,7 @@ class log_container: public log_appender {
     log_container_iterator begin();
     log_container_iterator end();
     // Append a record blob to the log store.
-    bool append(const log_record &rec);
+    bool append(log_record &&rec);
     // Removes all data before the given position in the log store. Disk space used must remain roughly
     // proportional to retained data size.
     bool truncate(const uint64_t &position);

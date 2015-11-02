@@ -15,7 +15,7 @@ class log_appender {
     std::mutex mutex_;
 
   private:
-    bool write_record_tmp_file(const log_record &rec, const std::string &tmp_file_name);
+    bool write_record_tmp_file(log_record &rec, const std::string &tmp_file_name);
 
   public:
     log_appender(std::string log_store_name);
@@ -23,7 +23,7 @@ class log_appender {
     uint64_t get_start_record_num() const;
     uint64_t get_end_record_num() const;
     uint64_t get_num_of_records() const;
-    bool append_record(const log_record &rec);
+    bool append_record(log_record &rec);
     bool read_record(const uint64_t &record_id, std::string &record);
     bool truncate_record(const uint64_t &position);
 };

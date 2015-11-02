@@ -24,7 +24,7 @@ log_container_iterator log_container::end() {
 }
 
 // Append a record blob to the log store.
-bool log_container::append(const log_record &rec) {
+bool log_container::append(log_record &&rec) {
     return append_record(rec);
 }
 

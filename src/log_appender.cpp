@@ -1,6 +1,7 @@
 #include "log_appender.h"
 #include "util.h"
 #include <fstream>
+#include <iostream>
 
 log_appender::log_appender(std::string log_store_name): log_store_name_(log_store_name),
     start_record_id_(0),
@@ -20,9 +21,11 @@ uint64_t log_appender::get_num_of_records() const {
     return end_record_id_ - start_record_id_;
 }
 
-bool log_appender::write_record_tmp_file(const log_record &rec, const std::string &tmp_file_name) {
+bool log_appender::write_record_tmp_file(log_record &rec, const std::string &tmp_file_name) {
     std::ofstream file;
-    std::vector<char> data = rec.get_message();
+    std::vector<char> data;
+    rec.get_message(data);
+
     uint64_t total_bytes_to_write = data.size();
 
     if (total_bytes_to_write == 0 ||
@@ -44,7 +47,7 @@ bool log_appender::write_record_tmp_file(const log_record &rec, const std::strin
     return true;
 }
 
-bool log_appender::append_record(const log_record &rec) {
+bool log_appender::append_record(log_record &rec) {
     std::string tmp_file_name = build_tmp_file_name();
 
     if (!write_record_tmp_file(rec, tmp_file_name)) {
