@@ -86,6 +86,7 @@ The following command runs a unit test.
 $ python compile_and_test.py
 
 # TODO:
+- check code with clang static analyzer
 - add more testing
 - add different log record types, at the moment only string records are supported
 - initialize start_record_id_ and end_record_id_ to zero if we hit uint64_t::max
