@@ -24,7 +24,7 @@ def main():
   run_sub_process(['make', 'clean'])
   run_sub_process(['make', 'BUILD=test'])
 
-  # run unit test to check for memory leaks
+  # run unit test
   stdout_res, stderr_res = run_sub_process(['./main'])
   
   if stderr_res.find("Assertion") == -1:
