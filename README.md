@@ -37,6 +37,12 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 ## Supported Platforms
 - Mac: OS X 10.10.3 (Yosemite) or greater, x86 and x86-64
 
+## Compiler
+- Clang
+Apple LLVM version 6.1.0 (clang-602.0.53) (based on LLVM 3.6.0svn)
+Target: x86_64-apple-darwin14.3.0
+Thread model: posix
+
 ## General
 - to minimize copying, blobs will segmented into multiple files
 - we have files F_0... F_n and they are filled with lines of data that have corresponding 'position' IDs
