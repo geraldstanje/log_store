@@ -35,7 +35,7 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 # Design
 
 ## Supported Platforms
-- Mac: OS X 10.7 (Lion) or greater, x86 and x86-64
+- Mac: OS X 10.10.3 (Yosemite) or greater, x86 and x86-64
 
 ## General
 - to minimize copying, blobs will segmented into multiple files
