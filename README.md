@@ -57,6 +57,7 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 ```cpp
 // create log container
 log_container log("system_log");
+
 // append blobs
 log.append(string_record("hello_how_are_you"));
 log.append(string_record("_great"));
