@@ -8,7 +8,7 @@
 const uint64_t max_record_size = 32 * 1024 * 1024; // in MB
 
 class log_appender {
-  public:
+  protected:
     std::string log_store_name_;
     uint64_t start_record_id_;
     uint64_t curr_record_id_;

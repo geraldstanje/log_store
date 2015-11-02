@@ -7,7 +7,7 @@
 // a record could be a string-record, time-record, object-record,
 // holds internally a std::vector<char>
 class log_record {
-  public:
+  private:
     std::vector<char> message_;
 
   public:

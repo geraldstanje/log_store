@@ -6,7 +6,7 @@
 #include <string>
 
 class log_container_iterator {
-  public:
+  private:
     log_appender *ptr_;
     uint64_t curr_record_id_;
 
