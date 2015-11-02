@@ -60,3 +60,4 @@ $ python compile_and_test.py
 
 # TODO:
 - add more testing
+- initialize start_record_id_ and 64 bit end_record_id_ to zero if we hit uint64_t::max
