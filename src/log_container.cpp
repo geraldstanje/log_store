@@ -29,11 +29,11 @@ bool log_container::append(const log_record &rec) {
 }
 
 // Gets the current position of the log store.
-unsigned int log_container::get_position() {
+uint64_t log_container::get_position() const {
     return get_end_record_num();
 }
 
-unsigned int log_container::get_size() {
+uint64_t log_container::get_size() const {
     return get_num_of_records();
 }
 

@@ -8,15 +8,15 @@ log_appender::log_appender(std::string log_store_name, uint64_t max_size): log_s
 
 log_appender::~log_appender() {}
 
-uint64_t log_appender::get_start_record_num() {
+uint64_t log_appender::get_start_record_num() const {
     return start_record_id_;
 }
 
-uint64_t log_appender::get_end_record_num() {
+uint64_t log_appender::get_end_record_num() const {
     return curr_record_id_;
 }
 
-uint64_t log_appender::get_num_of_records() {
+uint64_t log_appender::get_num_of_records() const {
     return curr_record_id_ - start_record_id_;
 }
 

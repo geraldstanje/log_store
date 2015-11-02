@@ -21,12 +21,12 @@ class log_container: public log_appender {
     log_container_iterator end();
     // Append a record blob to the log store.
     bool append(const log_record &rec);
-    // Gets the current position of the log store.
-    unsigned int get_position();
-    unsigned int get_size();
     // Removes all data before the given position in the log store. Disk space used must remain roughly
     // proportional to retained data size.
     bool truncate(const uint64_t &position);
+    // Gets the current position of the log store.
+    uint64_t get_position() const;
+    uint64_t get_size() const;
 };
 
 #endif
