@@ -40,7 +40,7 @@ class thread_test {
     }
 
     std::vector<std::vector<std::string>> get_out() const {
-        return out;
+        return std::move(out);
     }
 };
 
