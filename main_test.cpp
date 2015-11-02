@@ -5,8 +5,6 @@
 #include <cassert>
 
 int main() {
-    // your code goes here
-
     std::string out;
 
     log_container log("system_log", 520);
