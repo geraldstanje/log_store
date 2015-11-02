@@ -2,7 +2,7 @@
 #include "util.h"
 #include <fstream>
 
-log_appender::log_appender(std::string log_store_name, uint64_t max_size): log_store_name_(log_store_name),
+log_appender::log_appender(std::string log_store_name): log_store_name_(log_store_name),
     start_record_id_(0),
     end_record_id_(0) {}
 

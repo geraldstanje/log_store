@@ -76,7 +76,7 @@ bool check_read_data(std::vector<std::vector<std::string>> &&out) {
 void multithreading_test() {
     std::vector<std::thread> reader_pool;
 
-    log_container log("system_log", 520);
+    log_container log("system_log");
     thread_test t(&log);
 
     std::thread writer(&thread_test::writer_thread, &t);
@@ -102,7 +102,7 @@ void multithreading_test() {
 void basic_test() {
     std::string out;
 
-    log_container log("system_log", 520);
+    log_container log("system_log");
     log.append(string_record("hello_how_are_you"));
     log.append(string_record("_great"));
     log.append(string_record("_amazing"));

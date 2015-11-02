@@ -2,7 +2,7 @@
 #include "util.h"
 #include <fstream>
 
-log_container::log_container(std::string log_store_name, uint64_t max_log_store_size): log_appender(log_store_name, max_log_store_size),
+log_container::log_container(std::string log_store_name): log_appender(log_store_name),
     log_store_name_(log_store_name) {
     import_log_info();
 }

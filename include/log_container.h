@@ -15,7 +15,7 @@ class log_container: public log_appender {
     bool import_log_info();
 
   public:
-    log_container(std::string log_store_name, uint64_t max_log_store_size);
+    log_container(std::string log_store_name);
     ~log_container();
     log_container_iterator begin();
     log_container_iterator end();

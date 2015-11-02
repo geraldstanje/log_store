@@ -18,7 +18,7 @@ class log_appender {
     bool write_record_tmp_file(const log_record &rec, const std::string &tmp_file_name);
 
   public:
-    log_appender(std::string log_store_name, uint64_t max_size);
+    log_appender(std::string log_store_name);
     ~log_appender();
     uint64_t get_start_record_num() const;
     uint64_t get_end_record_num() const;
