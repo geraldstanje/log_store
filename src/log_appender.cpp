@@ -25,7 +25,9 @@ bool log_appender::write_record_tmp_file(const log_record &rec, const std::strin
     std::vector<char> data = rec.get_message();
     uint64_t total_bytes_to_write = data.size();
 
-    if (total_bytes_to_write > max_record_size || total_bytes_to_write > get_available_free_space()) {
+    if (total_bytes_to_write == 0 || 
+        total_bytes_to_write > max_record_size || 
+        total_bytes_to_write > get_available_free_space()) {
         return false;
     }
 
@@ -35,7 +37,6 @@ bool log_appender::write_record_tmp_file(const log_record &rec, const std::strin
     }
 
     file.write(data.data(), total_bytes_to_write);
-
     if (!file.good()) {
         return false;
     }
