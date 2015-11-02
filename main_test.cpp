@@ -75,18 +75,18 @@ void multithreading_test() {
     log_container log("system_log");
     thread_test t(&log);
 
-    std::vector<std::thread> worker;
+    std::vector<std::thread> workers;
 
     // create write thread
-    worker.push_back(std::thread(&thread_test::write_thread, &t));
+    workers.push_back(std::thread(&thread_test::write_thread, &t));
 
     // create multiple read threads
     for (uint64_t i = 0; i < 10; i++) {
-        worker.push_back(std::thread(&thread_test::read_thread, &t));
+        workers.push_back(std::thread(&thread_test::read_thread, &t));
     }
 
     // wait for all threads to finish
-    for (auto& thread : worker) {
+    for (auto& thread : workers) {
         thread.join();
     }
 
