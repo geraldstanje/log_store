@@ -12,7 +12,7 @@ class log_record {
 
   public:
     log_record(std::vector<char> &&vec);
-    void get_message(std::vector<char> &in);
+    std::vector<char> get_message();
 };
 
 class string_record: public log_record {
