@@ -34,6 +34,9 @@ You may use the standard C and C++ libraries, as well as any system calls availa
 
 # Design
 
+## Supported Platforms
+- Mac: OS X 10.7 (Lion) or greater, x86 and x86-64
+
 ## General
 - to minimize copying, blobs will segmented into multiple files
 - truncate will find all the files before the given position that are fully of completely deletable data
