@@ -83,7 +83,9 @@ log.truncate(pos-1);
 # Run Unit test
 The following command runs a unit test.
 
+```python
 $ python compile_and_test.py
+```
 
 # TODO
 - check code with clang static analyzer
