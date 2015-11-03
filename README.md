@@ -72,7 +72,7 @@ log.append(string_record("_yes"));
 
 // replay blobs from the beginning till end
 for (log_container_iterator itr = log.begin(); itr != log.end(); itr++) {
-    std::cout << log_formatter::format(*itr) << std::endl;
+    std::cout << log_formatter::to_string(*itr) << std::endl;
 }
 
 // truncate blobs from a position till the start

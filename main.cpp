@@ -11,7 +11,7 @@ int main() {
     log.append(string_record("_yes"));
 
     for (log_container_iterator itr = log.begin()+1; itr != log.end(); itr++) {
-        std::cout << log_formatter::format(*itr) << std::endl;
+        std::cout << log_formatter::to_string(*itr) << std::endl;
     }
 
     // empty log store
