@@ -13,7 +13,7 @@ class thread_test {
   private:
     log_container *log_;
     std::mutex lock_;
-    std::vector<std::vector<std::string>> out;
+    std::vector<std::vector<std::string>> out_;
 
   public:
     thread_test(log_container *log): log_(log) {}
@@ -36,11 +36,11 @@ class thread_test {
         }
 
         std::lock_guard<std::mutex> lock(lock_);
-        out.push_back(records);
+        out_.push_back(records);
     }
 
     std::vector<std::vector<std::string>> get_out() const {
-        return std::move(out);
+        return std::move(out_);
     }
 };
 
