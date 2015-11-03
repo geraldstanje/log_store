@@ -73,7 +73,7 @@ uint64_t get_available_free_space() {
     struct passwd *pw = getpwuid(getuid());
 
     if (pw != NULL && statvfs(pw->pw_dir, &stat) == 0) {
-        uint64_t freeBytes = (uint64_t)stat.f_bavail * stat.f_frsize;
+        uint64_t freeBytes = static_cast<uint64_t>(stat.f_bavail * stat.f_frsize);
         return freeBytes;
     }
     return 0ULL;
