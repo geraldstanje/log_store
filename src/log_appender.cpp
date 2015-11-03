@@ -24,7 +24,6 @@ uint64_t log_appender::get_num_of_records() const {
 bool log_appender::write_record_tmp_file(log_record &rec, const std::string &tmp_file_name) {
     std::ofstream file;
     std::vector<char> data = rec.get_message();
-
     uint64_t total_bytes_to_write = data.size();
 
     if (total_bytes_to_write == 0 ||
