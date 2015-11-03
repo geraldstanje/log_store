@@ -63,7 +63,7 @@ bool log_appender::append_record(log_record &rec) {
     return true;
 }
 
-bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
+bool log_appender::read_record(const uint64_t &record_id, log_record &record) {
     std::ifstream file;
     uint64_t total_size = 0;
 
@@ -76,7 +76,7 @@ bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
         }
 
         total_size = get_file_size(log_store_name_, record_id);
-        record.resize(total_size, 0);
+        //record.resize(total_size, 0);
 
         file.open(build_file_name(log_store_name_, "data", record_id).c_str(), std::ios::in | std::ios::binary);
         if (!file.is_open()) {
@@ -84,7 +84,10 @@ bool log_appender::read_record(const uint64_t &record_id, std::string &record) {
         }
     }
 
-    file.read(&record[0], total_size);
+    std::vector<char> buffer;
+    buffer.resize(total_size, 0);
+    file.read(&buffer[0], total_size);
+    record.message_ = std::move(buffer);
     return true;
 }
 

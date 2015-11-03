@@ -3,7 +3,7 @@
 
 #include "log_appender.h"
 #include <cstdint>
-#include <string>
+#include <vector>
 
 class log_container_iterator {
   private:
@@ -16,8 +16,8 @@ class log_container_iterator {
     bool operator== (const log_container_iterator &it);
     bool operator!= (const log_container_iterator &it);
     uint64_t get_curr_record_id() const;
-    std::string operator* ();
-    std::string get_curr_record();
+    log_record operator* ();
+    log_record get_curr_record();
     void operator++(int);
     void operator++();
     log_container_iterator operator+(uint64_t offset) const;

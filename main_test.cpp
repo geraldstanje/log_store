@@ -1,5 +1,6 @@
 #include "log_container.h"
 #include "log_container_iterator.h"
+#include "log_formatter.h"
 #include "util.h"
 #include <iostream>
 #include <string>
@@ -32,7 +33,7 @@ class thread_test {
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
         for (log_container_iterator itr = log_->begin(); itr != log_->end(); itr++) {
-            records.push_back(*itr);
+            records.push_back(log_formatter::format(*itr));
         }
 
         std::lock_guard<std::mutex> lock(lock_);
@@ -114,7 +115,7 @@ void basic_test() {
     out.clear();
 
     for (log_container_iterator itr = log.begin(); itr != log.end(); itr++) {
-        out += *itr;
+        out += log_formatter::format(*itr);
     }
 
     assert(out == "hello_how_are_you_great_amazing_yes");
@@ -124,7 +125,7 @@ void basic_test() {
 
     out.clear();
     for (log_container_iterator itr = log.begin(); itr != log.end(); itr++) {
-        out += *itr;
+        out += log_formatter::format(*itr);
     }
 
     assert(out == "_great_amazing_yes");
@@ -135,7 +136,7 @@ void basic_test() {
 
     out.clear();
     for (log_container_iterator itr = log.begin(); itr != log.end(); itr++) {
-        out += *itr;
+        out += log_formatter::format(*itr);
     }
 
     assert(out == "_great_amazing_yes_wonderful");

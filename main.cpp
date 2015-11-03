@@ -1,5 +1,6 @@
 #include "log_container.h"
 #include "log_container_iterator.h"
+#include "log_formatter.hs"
 #include <iostream>
 
 int main() {
@@ -10,7 +11,7 @@ int main() {
     log.append(string_record("_yes"));
 
     for (log_container_iterator itr = log.begin()+1; itr != log.end(); itr++) {
-        std::cout << *itr << std::endl;
+        std::cout << log_formatter::format(*itr) << std::endl;
     }
 
     // empty log store
