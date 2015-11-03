@@ -76,5 +76,5 @@ uint64_t get_available_free_space() {
         uint64_t freeBytes = static_cast<uint64_t>(stat.f_bavail * stat.f_frsize);
         return freeBytes;
     }
-    return 0;
+    return 0ULL;
 }
