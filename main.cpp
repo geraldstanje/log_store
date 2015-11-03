@@ -1,6 +1,6 @@
 #include "log_container.h"
 #include "log_container_iterator.h"
-#include "log_formatter.hs"
+#include "log_formatter.h"
 #include <iostream>
 
 int main() {
