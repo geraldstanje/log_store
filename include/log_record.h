@@ -14,8 +14,7 @@ class log_record {
     log_record();
     log_record(std::vector<char> &&vec);
     std::vector<char> get_message();
-    void resize(uint64_t size);
-    char* get_message_ptr();
+    char* get_message_data(uint64_t size);
 };
 
 class string_record: public log_record {

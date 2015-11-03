@@ -83,8 +83,7 @@ bool log_appender::read_record(const uint64_t &record_id, log_record &record) {
         }
     }
 
-    record.resize(total_size);
-    file.read(record.get_message_ptr(), total_size);
+    file.read(record.get_message_data(total_size), total_size);
     return true;
 }
 
