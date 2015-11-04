@@ -78,3 +78,16 @@ uint64_t get_available_free_space() {
     }
     return 0;
 }
+
+std::string random_string(uint64_t length) {
+    auto randchar = []() -> char {
+        const char charset[] =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz";
+        const size_t max_index = (sizeof(charset) - 1);
+        return charset[rand() % max_index];
+    };
+    std::string str(length,0);
+    std::generate_n(str.begin(), length, randchar);
+    return str;
+}

@@ -9,6 +9,7 @@
 #include <chrono>
 #include <sstream>
 #include <mutex>
+#include <locale>
 
 class thread_test {
   private:
@@ -21,7 +22,7 @@ class thread_test {
 
     void write_thread() {
         for (uint64_t i = 1; i <= 100; i++) {
-            log_->append(string_record("hello_world: " + int_to_string(i)));
+            log_->append(string_record(random_string(100) + int_to_string(i)));
 
             std::this_thread::sleep_for(std::chrono::milliseconds(50));
         }
@@ -46,18 +47,15 @@ class thread_test {
 };
 
 bool check_read_data(std::vector<std::vector<std::string>> &&out) {
-    std::string pattern = "hello_world: ";
-
     for (auto &vec : out) {
         uint64_t prev_count = 0;
 
         for (auto &e : vec) {
-            size_t pos = e.find(pattern);
+            size_t pos = e.find_first_of("0123456789");
             if (pos == std::string::npos) {
                 return false;
             }
 
-            pos += pattern.size();
             std::string counter = e.substr(pos, e.size() - pos);
             uint64_t count = string_to_int(counter);
 
