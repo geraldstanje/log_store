@@ -92,4 +92,4 @@ $ python compile_and_test.py
 - add more testing
 - add different log record types, at the moment only string records are supported
 - initialize start_record_id_ and end_record_id_ to zero if they hit uint64_t::max
-- replace function 'tmpnam' which is deprecated (compiler warning) in src/util.cpp
+- replace deprecated function 'tmpnam' (compiler warning) in src/util.cpp
