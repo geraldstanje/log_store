@@ -46,7 +46,7 @@ Thread model: posix
 ## General
 - to minimize copying, blobs will segmented into multiple files
 - we have files F_x... F_n and they are filled with data, x = start_record_id_, n = end_record_id_
-- the log store internally keeps two numbers: first active number (start_record_id_) and last active number (end_record_id_)
+- the log store internally keeps two numbers: first active number (start_record_id_) and last active number (end_record_id_), see log_appender.h
 - append will create a new file (*.data) with the current end_record_id_ and increment end_record_id_ plus 1
 - truncate will find all the files before the given position that can be deleted, start_record_id_ will be incremented to the position, the files will be deleted.
 - the log store destructor exports the 64 bit start_record_id_ and 64 bit end_record_id_ to a .config file, which can be read at startup
