@@ -3,7 +3,7 @@
 # Info
 A log store is a record storage model where updates only need to append rather than seeking and writing. To load the records, the log store is read from a position and replayed back. The ordering of records ensure a consistent model. A log store would grow without bound unless it is maintained. One way reduce its size is to re-append the records to be preserved, then truncate the store. Truncating the store should release storage back to the operating system. However, not all data is required to be released, so long as the disk footprint remains roughly proportional to the data retained.
 
-In C++ or C++11 (or higher), implement a simple log store with the following requirements and functions:
+The log store has the following requirements and functions:
 
 # Requirements
 
@@ -25,12 +25,6 @@ Functions:
 
   replay(position, callback)
     Replays all record blobs from the position onward, invoking the callback for each blob visited
-
-Note: The above function signatures are only illustrative. You may vary your interface in whatever way you think makes sense. For example, instead of a callback for replay (...), you may decide to use an iterator pattern.
-
-Notes:
-
-You may use the standard C and C++ libraries, as well as any system calls available on the OS. Libraries such as boost are also acceptable. However, your homework will be judged on how much of the problem your code solves versus how much is solved by libraries.
 
 # Design
 
