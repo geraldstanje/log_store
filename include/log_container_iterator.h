@@ -7,7 +7,7 @@
 
 class log_container_iterator {
   private:
-    log_appender *ptr_;
+    log_appender *log_app_ptr_;
     uint64_t curr_record_id_;
 
   public:

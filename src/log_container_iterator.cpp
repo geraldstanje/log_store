@@ -2,10 +2,10 @@
 #include "log_record.h"
 #include <cstdint>
 
-log_container_iterator::log_container_iterator(log_appender *ptr): ptr_(ptr), curr_record_id_(0) {}
+log_container_iterator::log_container_iterator(log_appender *ptr): log_app_ptr_(ptr), curr_record_id_(0) {}
 
 log_container_iterator::log_container_iterator(const log_container_iterator &other) {
-    ptr_ = other.ptr_;
+    log_app_ptr_ = other.log_app_ptr_;
     curr_record_id_ = other.curr_record_id_;
 }
 
@@ -27,8 +27,8 @@ log_record log_container_iterator::operator* () {
 
 log_record log_container_iterator::get_curr_record() {
     log_record record;
-    if (!ptr_->read_record(curr_record_id_, record)) {
-        curr_record_id_ = ptr_->get_end_record_num() - 1;
+    if (!log_app_ptr_->read_record(curr_record_id_, record)) {
+        curr_record_id_ = log_app_ptr_->get_end_record_num() - 1;
     }
     return record;
 }
@@ -49,9 +49,9 @@ log_container_iterator log_container_iterator::operator+(uint64_t offset) const 
 }
 
 void log_container_iterator::log_container_iterator_begin() {
-    curr_record_id_ = ptr_->get_start_record_num();
+    curr_record_id_ = log_app_ptr_->get_start_record_num();
 }
 
 void log_container_iterator::log_container_iterator_end() {
-    curr_record_id_ = ptr_->get_end_record_num();
+    curr_record_id_ = log_app_ptr_->get_end_record_num();
 }
