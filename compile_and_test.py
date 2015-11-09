@@ -19,6 +19,7 @@ def remove_files(fileext):
 
 def main():
   # call clang static analyzer
+  run_sub_process(['make', 'clean'])
   run_sub_process(['rm', '-rf', 'report'])
   run_sub_process(['mkdir', '-p', 'report'])
   # could also use subprocess.check_call and it'll raise subprocess.CalledProcessError if it's != 0
