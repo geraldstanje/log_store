@@ -79,6 +79,8 @@ The following command checks the code with clang's static analyzer and runs a un
 
 ```python
 $ python compile_and_test.py
+clang static analyzer check...passed
+unit test...passed
 ```
 
 # TODO
