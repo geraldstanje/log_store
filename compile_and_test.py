@@ -30,8 +30,6 @@ def main():
   else:
     print "clang static analyzer check...passed"
 
-  exit(0)
-
   # compile unit test
   remove_files("*.config")
   remove_files("*.data")
