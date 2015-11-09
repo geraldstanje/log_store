@@ -86,4 +86,4 @@ $ python compile_and_test.py
 - add different log record types, at the moment only string records are supported
 - initialize start_record_id_ and end_record_id_ to zero if they hit uint64_t::max
 - replace deprecated function 'tmpnam' (compiler warning) in src/util.cpp
-- store multiple blobs in a single file
+- store multiple blobs in a single file, needs benchmarking to figure out if it will improve the performance
