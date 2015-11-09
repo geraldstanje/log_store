@@ -75,14 +75,13 @@ log.truncate(pos-1);
 ```
 
 # Run Unit test
-The following command runs a unit test.
+The following command checks the code with clang's static analyzer and runs a unit test.
 
 ```python
 $ python compile_and_test.py
 ```
 
 # TODO
-- check code with clang static analyzer
 - add more testing
 - add different log record types, at the moment only string records are supported
 - initialize start_record_id_ and end_record_id_ to zero if they hit uint64_t::max
